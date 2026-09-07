@@ -1,0 +1,660 @@
+<title>Scrubbora Cleaning Co.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=Kaushan+Script&display=swap">
+<style>
+:root{
+  --pink:#FF2D8D; --teal:#00D1C5;
+  --ink:#0D0D0F; --ink2:#15151A; --grey:#2A2A2E; --grey2:#3A3A42;
+  --paper:#F2F2F2; --muted:#A9A9B4;
+  --shadow:0 20px 60px -20px rgba(0,0,0,.8);
+  --mop:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><g transform='rotate(-20 20 20)'><rect x='18' y='2' width='3.4' height='20' rx='1.7' fill='%2300D1C5'/><path d='M11 21h18l-2.2 11a2 2 0 0 1-2 1.7h-9.6a2 2 0 0 1-2-1.7z' fill='%23FF2D8D'/><rect x='10' y='19' width='20' height='3.6' rx='1.8' fill='%23F2F2F2'/></g></svg>") 20 4, auto;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:Montserrat,system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+@media (hover:hover) and (pointer:fine){
+  body,a,button,.card,summary{cursor:var(--mop)}
+  input,select,textarea,.bookform *,.calc *{cursor:auto}
+  .bookform button,.calc button{cursor:pointer}
+}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:4px}
+img{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.script{font-family:"Kaushan Script",cursive;font-weight:400}
+.display{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;letter-spacing:.01em;line-height:.92}
+.label{font-family:Montserrat,sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal)}
+.pinklabel{color:var(--pink)}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,15,0);backdrop-filter:blur(0px);transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
+nav.stuck{background:rgba(13,13,15,.88);backdrop-filter:blur(14px);border-bottom-color:var(--grey)}
+.navin{display:flex;align-items:center;gap:26px;padding:16px 0}
+.brand{font-family:"Kaushan Script",cursive;font-size:30px;color:var(--pink);line-height:1;position:relative;white-space:nowrap}
+.brand em{font-style:normal;display:block;font-family:Montserrat,sans-serif;font-size:8.5px;letter-spacing:.28em;color:var(--teal);text-transform:uppercase;margin-top:-2px;padding-left:3px}
+.navlinks{display:flex;gap:24px;margin-left:auto;font-size:14px;font-weight:600}
+.navlinks a{color:var(--muted);transition:color .2s}
+.navlinks a:hover{color:var(--paper)}
+.navcta{background:var(--pink);color:#fff;padding:11px 20px;border-radius:99px;font-weight:700;font-size:14px;transition:transform .2s,box-shadow .2s;white-space:nowrap}
+.navcta:hover{transform:translateY(-2px);box-shadow:0 8px 24px -6px var(--pink)}
+.navphone{font-weight:700;font-size:14px;color:var(--teal);white-space:nowrap}
+@media(max-width:900px){.navlinks,.navphone{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:132px 0 72px;overflow:hidden}
+.heroglow{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(680px 400px at 18% 20%,rgba(255,45,141,.20),transparent 65%),
+             radial-gradient(620px 420px at 88% 62%,rgba(0,209,197,.16),transparent 62%)}
+.herogrid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+@media(max-width:940px){.herogrid{grid-template-columns:1fr;gap:34px}.hero{padding:110px 0 52px}}
+h1{margin:14px 0 0;font-family:"Bebas Neue",Impact,sans-serif;font-size:clamp(46px,7.4vw,86px);line-height:.9;letter-spacing:.005em}
+h1 .tealword{color:var(--teal)}
+h1 .pinkword{color:var(--pink)}
+.sub{font-size:clamp(16px,1.9vw,19px);color:var(--muted);max-width:40ch;margin:20px 0 0}
+.sub b{color:var(--paper);font-weight:600}
+.herobtns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-block;padding:15px 28px;border-radius:99px;font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s,background .2s}
+.btn-pink{background:var(--pink);color:#fff}
+.btn-pink:hover{transform:translateY(-2px);box-shadow:0 12px 32px -8px var(--pink)}
+.btn-ghost{border:1.5px solid var(--grey2);color:var(--paper)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+.trust{display:flex;gap:8px 22px;flex-wrap:wrap;margin-top:26px;font-size:12.5px;color:var(--muted);font-weight:600}
+.trust span{display:flex;align-items:center;gap:7px}
+.tick{width:15px;height:15px;flex:none;fill:none;stroke:var(--teal);stroke-width:2.6}
+
+/* photo slot */
+.shot{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:
+  linear-gradient(145deg,#1b1b22,#101015);border:1px solid var(--grey);box-shadow:var(--shadow)}
+.shot::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(340px 300px at 62% 34%,rgba(255,45,141,.16),transparent 68%),
+             radial-gradient(300px 280px at 26% 78%,rgba(0,209,197,.14),transparent 66%)}
+.slot{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:24px;z-index:2}
+.slot .label{color:var(--muted)}
+.slot p{font-size:13px;color:var(--grey2);margin:0;max-width:24ch;font-weight:600}
+.spark{position:absolute;z-index:3;pointer-events:none;animation:tw 3.4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.25;transform:scale(.82)}50%{opacity:1;transform:scale(1.12)}}
+@media (prefers-reduced-motion:reduce){.spark{animation:none;opacity:.7}}
+
+/* ---------- price calculator ---------- */
+.calcwrap{position:relative;z-index:2;margin-top:56px}
+.calc{background:linear-gradient(160deg,#17171d,#111116);border:1px solid var(--grey);border-radius:20px;padding:26px 28px;box-shadow:var(--shadow)}
+.calchead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.calchead h2{font-family:"Bebas Neue",sans-serif;font-size:30px;margin:0;letter-spacing:.01em}
+.calchead p{margin:0;font-size:13.5px;color:var(--muted)}
+.calcgrid{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:20px;align-items:end}
+@media(max-width:860px){.calcgrid{grid-template-columns:1fr 1fr;gap:16px}}
+@media(max-width:520px){.calcgrid{grid-template-columns:1fr}}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opt{border:1.5px solid var(--grey2);background:transparent;color:var(--paper);font:inherit;font-size:13.5px;font-weight:600;padding:9px 13px;border-radius:9px;transition:all .18s}
+.opt:hover{border-color:var(--teal)}
+.opt.on{background:var(--teal);border-color:var(--teal);color:#08282a}
+.priceout{text-align:right;min-width:150px}
+.priceout .amt{font-family:"Bebas Neue",sans-serif;font-size:58px;line-height:.9;color:var(--pink)}
+.priceout .per{font-size:12px;color:var(--muted);font-weight:600}
+.calcnote{margin:18px 0 0;font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--grey);padding-top:16px}
+
+/* ---------- sections ---------- */
+section{padding:88px 0}
+.sechead{max-width:640px;margin-bottom:44px}
+.sechead h2{font-family:"Bebas Neue",sans-serif;font-size:clamp(34px,5vw,52px);margin:12px 0 14px;line-height:.94}
+.sechead p{color:var(--muted);font-size:17px;margin:0}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.card{background:linear-gradient(160deg,#17171d,#111116);border:1px solid var(--grey);border-radius:18px;padding:28px;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-6px);border-color:var(--pink)}
+.card h3{font-family:"Bebas Neue",sans-serif;font-size:27px;margin:14px 0 8px;letter-spacing:.01em}
+.card p{color:var(--muted);font-size:14.5px;margin:0 0 16px}
+.card ul{margin:0 0 18px;padding-left:17px;color:var(--muted);font-size:14px}
+.card li{margin-bottom:5px}
+.card .from{font-family:"Bebas Neue",sans-serif;font-size:30px;color:var(--teal)}
+.card .from small{font-family:Montserrat;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(255,45,141,.12);border:1px solid rgba(255,45,141,.28)}
+.icon svg{width:22px;height:22px;fill:none;stroke:var(--pink);stroke-width:2}
+.card:nth-child(2) .icon{background:rgba(0,209,197,.12);border-color:rgba(0,209,197,.28)}
+.card:nth-child(2) .icon svg{stroke:var(--teal)}
+
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;counter-reset:s}
+.step{counter-increment:s;position:relative;padding-top:52px}
+.step::before{content:"0" counter(s);position:absolute;top:0;left:0;font-family:"Bebas Neue",sans-serif;font-size:44px;color:var(--grey2)}
+.step h3{font-size:19px;margin:0 0 8px;font-weight:700}
+.step p{color:var(--muted);font-size:14.5px;margin:0}
+
+/* before after */
+.ba{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--grey);box-shadow:var(--shadow);user-select:none;touch-action:none}
+.ba .side{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.ba .before{background:linear-gradient(150deg,#2a2620,#191712)}
+.ba .after{background:linear-gradient(150deg,#12242a,#0e1a1e);clip-path:inset(0 0 0 50%)}
+.ba .side .label{margin-bottom:6px}
+.ba .side p{margin:0;font-size:13px;color:var(--grey2);font-weight:600;max-width:22ch}
+.bahandle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--pink);z-index:5;transform:translateX(-50%)}
+.bahandle::after{content:"";position:absolute;top:50%;left:50%;width:44px;height:44px;border-radius:99px;background:var(--pink);transform:translate(-50%,-50%);box-shadow:0 6px 20px -4px rgba(0,0,0,.7)}
+.bahandle::before{content:"";position:absolute;top:50%;left:50%;z-index:2;width:16px;height:16px;transform:translate(-50%,-50%) rotate(45deg);border:solid #fff;border-width:2px 2px 0 0;opacity:.9}
+.bahint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:6;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);background:rgba(0,0,0,.55);padding:7px 14px;border-radius:99px;backdrop-filter:blur(6px)}
+
+/* commercial band */
+.commercial{background:var(--ink2);border-top:1px solid var(--grey);border-bottom:1px solid var(--grey)}
+.commercial .sechead h2{color:var(--paper)}
+.comgrid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+@media(max-width:880px){.comgrid{grid-template-columns:1fr;gap:28px}}
+.comlist{list-style:none;padding:0;margin:0}
+.comlist li{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--grey)}
+.comlist li:last-child{border-bottom:0}
+.comlist b{display:block;margin-bottom:2px;font-size:15px}
+.comlist span{color:var(--muted);font-size:14px}
+
+/* seniors */
+.seniors{background:linear-gradient(150deg,rgba(0,209,197,.09),rgba(255,45,141,.05));border:1px solid var(--grey);border-radius:22px;padding:44px}
+@media(max-width:640px){.seniors{padding:28px}}
+
+/* faq */
+details{border-bottom:1px solid var(--grey);padding:19px 0}
+summary{font-weight:700;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:"Bebas Neue",sans-serif;font-size:26px;color:var(--teal);flex:none;transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);margin:12px 0 0;font-size:15px;max-width:66ch}
+
+/* contact */
+.bookform{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.bookform{grid-template-columns:1fr}}
+.bookform .full{grid-column:1/-1}
+.bookform input,.bookform select,.bookform textarea{width:100%;background:#101015;border:1.5px solid var(--grey2);border-radius:11px;padding:14px 15px;color:var(--paper);font:inherit;font-size:15px;transition:border-color .2s}
+.bookform input:focus,.bookform select:focus,.bookform textarea:focus{border-color:var(--teal);outline:none}
+.bookform textarea{min-height:104px;resize:vertical}
+.bookform button{background:var(--pink);color:#fff;border:0;border-radius:99px;padding:16px;font:inherit;font-weight:700;font-size:16px;transition:transform .2s,box-shadow .2s}
+.bookform button:hover{transform:translateY(-2px);box-shadow:0 12px 32px -8px var(--pink)}
+.formnote{grid-column:1/-1;font-size:12.5px;color:var(--muted);margin:0}
+.sent{grid-column:1/-1;background:rgba(0,209,197,.12);border:1px solid var(--teal);border-radius:11px;padding:15px;font-size:14.5px;color:var(--teal);font-weight:600}
+
+/* marquee */
+.marq{overflow:hidden;border-top:1px solid var(--grey);border-bottom:1px solid var(--grey);padding:17px 0;background:var(--ink2)}
+.marqin{display:flex;gap:34px;white-space:nowrap;animation:slide 34s linear infinite;will-change:transform}
+@keyframes slide{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marqin{animation:none}}
+.marqin span{font-family:"Bebas Neue",sans-serif;font-size:22px;letter-spacing:.04em;color:var(--grey2);display:flex;align-items:center;gap:34px}
+.marqin span::after{content:"";width:8px;height:8px;background:var(--pink);transform:rotate(45deg);flex:none}
+
+/* ---------- scroll story ---------- */
+.story{background:var(--ink2);border-top:1px solid var(--grey);border-bottom:1px solid var(--grey)}
+.storygrid{display:grid;grid-template-columns:.92fr 1.08fr;gap:56px;align-items:start}
+@media(max-width:900px){.storygrid{grid-template-columns:1fr;gap:0}}
+.stage{position:sticky;position:-webkit-sticky;top:96px;height:min(66vh,560px);border-radius:20px;overflow:hidden;
+  background:linear-gradient(150deg,#191920,#0e0e12);border:1px solid var(--grey);box-shadow:var(--shadow)}
+@media(max-width:900px){.stage{display:none}}
+.layer{position:absolute;inset:0;display:grid;place-items:center;padding:34px;opacity:0;transform:scale(.97);
+  transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.layer.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.layer{transition:none}}
+.stagenum{position:absolute;top:20px;left:22px;font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:.16em;color:var(--grey2);z-index:9}
+.stagebar{position:absolute;left:0;bottom:0;height:3px;background:var(--pink);width:0;transition:width .5s cubic-bezier(.16,1,.3,1);z-index:9}
+
+.pricecard{background:#101015;border:1px solid var(--grey2);border-radius:16px;padding:26px 30px;text-align:center;min-width:230px}
+.pricecard .lbl{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pricecard .big{font-family:"Bebas Neue",sans-serif;font-size:74px;line-height:.86;color:var(--pink);margin:10px 0 4px}
+.pricecard .sm{font-size:12.5px;color:var(--muted)}
+
+.person{text-align:center}
+.avatar{width:112px;height:112px;border-radius:99px;margin:0 auto 18px;position:relative;
+  background:linear-gradient(150deg,rgba(255,45,141,.22),rgba(0,209,197,.16));border:2px solid var(--pink);display:grid;place-items:center}
+.avatar svg{width:52px;height:52px;fill:none;stroke:var(--pink);stroke-width:1.7}
+.person .nm{font-family:"Bebas Neue",sans-serif;font-size:30px;letter-spacing:.02em}
+.person .rl{font-size:12.5px;color:var(--teal);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.person .wk{font-size:13px;color:var(--muted);margin-top:14px}
+
+.room{position:relative;width:100%;max-width:330px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid var(--grey2)}
+.room .dirty{position:absolute;inset:0;background:linear-gradient(150deg,#2b2721,#1a1814)}
+.room .clean{position:absolute;inset:0;background:linear-gradient(150deg,#14262b,#0f1c21);clip-path:inset(0 0 0 100%);transition:clip-path 1.4s cubic-bezier(.16,1,.3,1)}
+.layer.on .room .clean{clip-path:inset(0 0 0 0)}
+.room .tag{position:absolute;bottom:10px;left:12px;z-index:3;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);background:rgba(0,0,0,.5);padding:5px 10px;border-radius:99px}
+
+.phone{width:190px;height:330px;border-radius:26px;border:2px solid var(--grey2);background:#0b0b0f;padding:14px 12px;display:flex;flex-direction:column;gap:9px}
+.phone .bar{height:5px;width:52px;border-radius:9px;background:var(--grey2);margin:2px auto 8px}
+.phone .ph{border-radius:9px;background:linear-gradient(150deg,#14262b,#101c21);flex:1}
+.phone .ph:nth-child(3){background:linear-gradient(150deg,#1c1a24,#121119)}
+.phone .cap{font-size:10px;color:var(--teal);font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center}
+
+.beat{min-height:74vh;display:flex;flex-direction:column;justify-content:center;padding:26px 0}
+@media(max-width:900px){.beat{min-height:auto;padding:26px 0;border-bottom:1px solid var(--grey)}}
+.beat .n{font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:.2em;color:var(--pink)}
+.beat h3{font-family:"Bebas Neue",sans-serif;font-size:clamp(28px,3.8vw,42px);margin:10px 0 12px;line-height:.98}
+.beat p{color:var(--muted);font-size:16.5px;margin:0;max-width:46ch}
+.beat.act h3{color:var(--paper)}
+.beat h3{color:var(--grey2);transition:color .5s}
+@media(max-width:900px){.beat h3{color:var(--paper)}}
+
+/* areas strip */
+.areastrip{border-top:1px solid var(--grey);background:var(--ink)}
+.areastrip .in{display:flex;gap:26px;align-items:center;flex-wrap:wrap;justify-content:space-between;padding:34px 0}
+.areastrip h3{font-family:"Bebas Neue",sans-serif;font-size:clamp(24px,3vw,34px);margin:8px 0 0;line-height:1}
+.areastrip .pills{display:flex;gap:8px;flex-wrap:wrap;max-width:620px}
+.areastrip .pills a{border:1px solid var(--grey2);border-radius:99px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--muted);transition:.2s}
+.areastrip .pills a:hover{border-color:var(--teal);color:var(--paper)}
+
+footer{background:#08080A;padding:64px 0 34px;border-top:1px solid var(--grey)}
+.footgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px;margin-bottom:44px}
+@media(max-width:820px){.footgrid{grid-template-columns:1fr 1fr;gap:28px}}
+footer h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin:0 0 15px;font-weight:700}
+footer a,footer p{color:var(--muted);font-size:14px;display:block;margin-bottom:9px}
+footer a:hover{color:var(--paper)}
+.footbot{border-top:1px solid var(--grey);padding-top:22px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--grey2)}
+.tagline{font-family:"Bebas Neue",sans-serif;font-size:clamp(22px,3.4vw,34px);letter-spacing:.13em;text-align:center;padding:34px 0;color:var(--paper)}
+.tagline i{font-style:normal;color:var(--teal)}
+</style>
+
+<nav id="nav"><div class="wrap navin">
+  <a href="#top" class="brand">Scrubbora<em>Cleaning Services</em></a>
+  <div class="navlinks">
+    <a href="#services">Services</a><a href="#pricing">Pricing</a>
+    <a href="#how">How it works</a><a href="#commercial">Commercial</a><a href="areas.html">Areas</a>
+  </div>
+  <a href="tel:+1250XXXXXXX" class="navphone">250-XXX-XXXX</a>
+  <a href="#book" class="navcta">Book in 60 seconds</a>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="heroglow"></div>
+  <div class="wrap">
+    <div class="herogrid">
+      <div>
+        <p class="label">Victoria &middot; Saanich &middot; Oak Bay &middot; Langford &middot; Sidney</p>
+        <h1>House &amp; <span class="tealword">Commercial</span><br>Cleaning in <span class="pinkword">Victoria, BC</span></h1>
+        <p class="sub">The <b>same cleaner, every visit.</b> Flat prices published up front, and a photo report when we're done. No walkthroughs, no vague quotes.</p>
+        <div class="herobtns">
+          <a href="#pricing" class="btn btn-pink">See prices &amp; book</a>
+          <a href="#commercial" class="btn btn-ghost">Commercial &amp; strata</a>
+        </div>
+        <div class="trust">
+          <span><svg class="tick" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>$2M insured &amp; bonded</span>
+          <span><svg class="tick" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>WorkSafeBC registered</span>
+          <span><svg class="tick" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Employees, not contractors</span>
+        </div>
+      </div>
+      <div class="shot">
+        <svg class="spark" style="top:12%;right:14%;width:34px" viewBox="0 0 24 24"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z" fill="#00D1C5"/></svg>
+        <svg class="spark" style="top:30%;right:32%;width:19px;animation-delay:.9s" viewBox="0 0 24 24"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z" fill="#FF2D8D"/></svg>
+        <svg class="spark" style="bottom:20%;left:16%;width:25px;animation-delay:1.8s" viewBox="0 0 24 24"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z" fill="#00D1C5"/></svg>
+        <div class="slot">
+          <p class="label">Photo slot</p>
+          <p>Team shot from the brand board — cleaner in the black tee. Swap for real Victoria work from month two.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="calcwrap reveal" id="pricing">
+      <div class="calc">
+        <div class="calchead">
+          <h2>Your price, right now</h2>
+          <p>No walkthrough. No callback. Recurring rates, pre-GST.</p>
+        </div>
+        <div class="calcgrid">
+          <div class="field"><label>Home size</label><div class="opts" id="size"></div></div>
+          <div class="field"><label>Bathrooms</label><div class="opts" id="bath"></div></div>
+          <div class="field"><label>How often</label><div class="opts" id="freq"></div></div>
+          <div class="priceout">
+            <div class="amt" id="amt">$155</div>
+            <div class="per" id="per">per visit &middot; every 2 weeks</div>
+          </div>
+        </div>
+        <p class="calcnote">
+          <span id="firstclean">First clean $209 &mdash; a deeper visit that brings the home to standard.</span>
+          <span>Add-ons: oven $45 &middot; fridge $35 &middot; interior windows $6 each</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marq"><div class="marqin" id="marq"></div></div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <p class="label">What we clean</p>
+      <h2>Three things, done properly</h2>
+      <p>Homes across Greater Victoria, clinics after hours, and strata common areas. Nothing we can't do well.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></div>
+        <h3>Homes</h3>
+        <p>Weekly, bi-weekly or monthly, with the same cleaner every visit and a flat price you can see before you book.</p>
+        <ul><li>Kitchen, bathrooms, floors, surfaces</li><li>Same cleaner, same day</li><li>Deep cleans &amp; move-outs</li><li>Seniors service available</li></ul>
+        <div class="from">$129 <small>/ visit</small></div>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div>
+        <h3>Clinics</h3>
+        <p>Evening cleaning for dental, medical, physio, vet and optometry practices. Documented, not improvised.</p>
+        <ul><li>Infection-control checklist</li><li>Colour-coded microfibre</li><li>Documented disinfectant dwell times</li><li>Photo log after every visit</li></ul>
+        <div class="from">$900 <small>/ month</small></div>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2M9 16h6"/></svg></div>
+        <h3>Buildings</h3>
+        <p>Lobbies, hallways, elevators, amenity rooms and parkade sweeps for strata and small commercial.</p>
+        <ul><li>Written scope by area</li><li>Named cleaner and supervisor</li><li>Monthly report for your council</li><li>24-hour response on any issue</li></ul>
+        <div class="from">$650 <small>/ month</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="story">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <p class="label pinklabel">How it works</p>
+      <h2>Four things nobody else promises</h2>
+      <p>Every cleaning company says they're thorough. None of it is checkable. Scroll — these are.</p>
+    </div>
+    <div class="storygrid">
+      <div class="stage">
+        <div class="stagenum" id="stagenum">01 / 04</div>
+        <div class="stagebar" id="stagebar"></div>
+
+        <div class="layer on" data-i="0">
+          <div class="pricecard">
+            <div class="lbl">3 bedroom &middot; bi-weekly</div>
+            <div class="big">$179</div>
+            <div class="sm">Published. Before you book.</div>
+          </div>
+        </div>
+
+        <div class="layer" data-i="1">
+          <div class="person">
+            <div class="avatar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
+            <div class="nm">Same cleaner</div>
+            <div class="rl">Every single visit</div>
+            <div class="wk">Tuesdays, 9:00&ndash;10:00</div>
+          </div>
+        </div>
+
+        <div class="layer" data-i="2">
+          <div class="room">
+            <div class="dirty"></div>
+            <div class="clean"></div>
+            <div class="tag">Before &rarr; after</div>
+          </div>
+        </div>
+
+        <div class="layer" data-i="3">
+          <div class="phone">
+            <div class="bar"></div>
+            <div class="ph"></div><div class="ph"></div><div class="ph"></div>
+            <div class="cap">Photo report sent</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="beats">
+        <div class="beat act" data-i="0">
+          <span class="n">01</span>
+          <h3>The price comes first</h3>
+          <p>Flat rates published by home size. You never wait on a callback or sit through a walkthrough just to learn what it costs. Molly Maid makes you book an in-home estimate for this.</p>
+        </div>
+        <div class="beat" data-i="1">
+          <span class="n">02</span>
+          <h3>The same person, every time</h3>
+          <p>One cleaner who learns your home, on a set day, in a one-hour window. Nothing gets explained twice. If they're away you hear it from us first, not from a stranger at the door.</p>
+        </div>
+        <div class="beat" data-i="2">
+          <span class="n">03</span>
+          <h3>The work gets done</h3>
+          <p>A written method, colour-coded cloths, and a no-go list so nothing gets damaged. Employees trained to our standard, not subcontractors doing it their own way.</p>
+        </div>
+        <div class="beat" data-i="3">
+          <span class="n">04</span>
+          <h3>Then you get the proof</h3>
+          <p>Photographs after every visit, sent to you. For clinics and strata they go to whoever needs to see them, automatically. Miss something? Tell us within 24 hours and we come back and fix it, no charge.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="areastrip" id="areas">
+  <div class="wrap in">
+    <div>
+      <p class="label">Where we work</p>
+      <h3>All thirteen Greater Victoria municipalities</h3>
+    </div>
+    <div class="pills">
+      <a href="#">Victoria</a><a href="#">Saanich</a><a href="#">Oak Bay</a><a href="#">Esquimalt</a>
+      <a href="#">View Royal</a><a href="#">Langford</a><a href="#">Colwood</a><a href="#">Highlands</a>
+      <a href="#">Metchosin</a><a href="#">Sidney</a><a href="#">North Saanich</a>
+      <a href="#">Central Saanich</a><a href="#">Sooke</a>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sechead reveal">
+      <p class="label">Proof</p>
+      <h2>Drag it. That's the job.</h2>
+      <p>Real Victoria homes go here once the first cleans are done — these are placeholders.</p>
+    </div>
+    <div class="ba reveal" id="ba">
+      <div class="side before"><div><p class="label" style="color:#5a5045">Before</p><p>Client photo slot</p></div></div>
+      <div class="side after" id="baAfter"><div><p class="label">After</p><p>Client photo slot</p></div></div>
+      <div class="bahandle" id="baHandle"></div>
+      <div class="bahint">Drag to reveal</div>
+    </div>
+  </div>
+</section>
+
+<section class="commercial" id="commercial">
+  <div class="wrap">
+    <div class="comgrid">
+      <div class="reveal">
+        <p class="label">For property managers &amp; practice administrators</p>
+        <h2 class="display" style="font-size:clamp(32px,4.6vw,48px);margin:12px 0 16px">Documented cleaning<br>for buildings that<br>get inspected</h2>
+        <p style="color:var(--muted);margin:0 0 24px;max-width:46ch">Written scope, named staff, photo logs and a monthly report you can forward to a council or a practice owner without editing it first.</p>
+        <a href="#book" class="btn btn-ghost">Request a walkthrough</a>
+      </div>
+      <ul class="comlist reveal">
+        <li><svg class="tick" style="width:19px;height:19px;margin-top:3px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>$2M liability, $5M on request</b><span>Certificates issued directly by our broker, naming you as additional insured.</span></div></li>
+        <li><svg class="tick" style="width:19px;height:19px;margin-top:3px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>WorkSafeBC clearance letter</b><span>Current and on file for the whole contract, so your liability is covered.</span></div></li>
+        <li><svg class="tick" style="width:19px;height:19px;margin-top:3px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>Bonded, background-checked employees</b><span>Not subcontractors. Trained to our method, covered under our policy.</span></div></li>
+        <li><svg class="tick" style="width:19px;height:19px;margin-top:3px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>12-month terms, 30 days' notice</b><span>Net 15. No auto-renew traps, no cancellation games.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="seniors reveal">
+      <div class="comgrid">
+        <div>
+          <p class="label pinklabel">Seniors service</p>
+          <h2 class="display" style="font-size:clamp(30px,4.2vw,44px);margin:12px 0 14px">Staying in your own<br>home should be easier</h2>
+          <p style="color:var(--muted);margin:0 0 20px;max-width:44ch">A fixed weekly slot with the same cleaner. No contract. And if family live away, a short note after each visit so they know things are alright.</p>
+          <a href="#book" class="btn btn-pink">Set it up for a parent</a>
+        </div>
+        <div>
+          <ul class="comlist" style="margin:0">
+            <li><div><b>The same person, every week</b><span>Not a rotating crew of strangers.</span></div></li>
+            <li><div><b>A narrow arrival window</b><span>An hour, not a day. You can plan around it.</span></div></li>
+            <li><div><b>No contract, ever</b><span>Stop any time, for any reason.</span></div></li>
+            <li><div><b>Set it up from anywhere</b><span>Book and pay from another city. We handle the rest.</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--ink2);border-top:1px solid var(--grey)">
+  <div class="wrap" style="max-width:840px">
+    <div class="sechead reveal"><p class="label">Questions</p><h2>Straight answers</h2></div>
+    <div class="reveal">
+      <details open><summary>Do you bring your own supplies?</summary><p>Yes, everything is included in the price. If you'd rather we use specific products in your home, leave them out and tell us.</p></details>
+      <details><summary>Do I really get the same cleaner every time?</summary><p>Yes. It's the main thing we're built around. If your regular cleaner is away, we tell you in advance rather than sending a stranger unannounced.</p></details>
+      <details><summary>Are your cleaners employees or subcontractors?</summary><p>Employees. They're trained to our method, insured under our policy and covered by WorkSafeBC. Subcontracting is cheaper to run and worse for you.</p></details>
+      <details><summary>What if something isn't right?</summary><p>Tell us within 24 hours and we come back and fix it at no charge. No argument.</p></details>
+      <details><summary>Do you clean dental and medical offices?</summary><p>Yes, after hours, with an infection-control checklist, colour-coded microfibre, documented disinfectant dwell times and a photo log after every visit.</p></details>
+      <details><summary>What areas do you cover?</summary><p>All of Greater Victoria: Victoria, Saanich, Oak Bay, Esquimalt, View Royal, Colwood, Langford, Highlands, Metchosin, Sooke, Central Saanich, North Saanich and Sidney.</p></details>
+      <details><summary>Is there anything you don't do?</summary><p>We don't do laundry, dishes, pet waste, personal errands, or anything needing a ladder above two steps. Keeping that line clear is how we keep the price honest.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="book">
+  <div class="wrap" style="max-width:760px">
+    <div class="sechead reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <p class="label">Book</p>
+      <h2>Tell us about the space</h2>
+      <p>We reply within five minutes during business hours. Genuinely.</p>
+    </div>
+    <form class="bookform reveal" id="form" novalidate>
+      <div><input name="name" placeholder="Your name" required autocomplete="name"></div>
+      <div><input name="phone" type="tel" placeholder="Phone" required autocomplete="tel"></div>
+      <div class="full"><input name="email" type="email" placeholder="Email" required autocomplete="email"></div>
+      <div><select name="type"><option>Home — recurring</option><option>Home — one-time or deep clean</option><option>Move-in / move-out</option><option>Dental or medical office</option><option>Strata common areas</option><option>Office or commercial</option><option>Post-construction</option></select></div>
+      <div><input name="area" placeholder="Neighbourhood or city"></div>
+      <div class="full"><textarea name="msg" placeholder="Anything we should know? Size, access, pets, timing…"></textarea></div>
+      <div class="full"><button type="submit">Send it &mdash; we'll reply in 5 minutes</button></div>
+      <p class="formnote">Or call <a href="tel:+1250XXXXXXX" style="color:var(--teal);font-weight:700">250-XXX-XXXX</a>. We never share your details.</p>
+    </form>
+  </div>
+</section>
+
+<div class="tagline">CLEAN SPACES. <i>&#10022;</i> BETTER PLACES.</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footgrid">
+      <div>
+        <a href="#top" class="brand" style="font-size:34px">Scrubbora<em>Cleaning Services</em></a>
+        <p style="margin-top:16px;max-width:30ch">Homes, clinics and buildings across Greater Victoria. Insured, bonded and WorkSafeBC registered.</p>
+      </div>
+      <div><h4>Services</h4><a href="#services">House cleaning</a><a href="#services">Deep cleans</a><a href="#services">Move-in / move-out</a><a href="#commercial">Medical &amp; dental</a><a href="#commercial">Strata &amp; commercial</a></div>
+      <div><h4>Areas</h4><a href="#">Victoria</a><a href="#">Saanich</a><a href="#">Oak Bay</a><a href="#">Langford</a><a href="#">Sidney</a></div>
+      <div><h4>Contact</h4><a href="tel:+1250XXXXXXX">250-XXX-XXXX</a><a href="mailto:hello@scrubbora.com">hello@scrubbora.com</a><a href="#book">Book online</a><p>Mon–Fri 8–6, Sat 9–4</p></div>
+    </div>
+    <div class="footbot">
+      <span>&copy; 2026 Scrubbora Cleaning Co. &middot; Victoria, BC</span>
+      <span>Insured &amp; bonded &middot; WorkSafeBC registered</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)};
+
+/* nav */
+var nav=$("#nav");
+var onScroll=function(){nav.classList.toggle("stuck",window.scrollY>28)};
+onScroll();window.addEventListener("scroll",onScroll,{passive:true});
+
+/* marquee */
+var words=["Homes","Dental &amp; Medical","Strata Common Areas","Move-Outs","Deep Cleans","Offices","Post-Construction","Seniors Service"];
+var m=$("#marq"),html=words.map(function(w){return "<span>"+w+"</span>"}).join("");
+m.innerHTML=html+html;
+
+/* price calculator */
+var SIZES=[
+ {k:"1 bed",base:129,first:174},{k:"2 bed",base:155,first:209},
+ {k:"3 bed apt",base:179,first:242},{k:"House <2000",base:199,first:269},
+ {k:"2000–2500",base:225,first:304},{k:"2500–3000",base:255,first:344}];
+var BATHS=["1","2","3","4+"];
+var FREQS=[{k:"Weekly",m:0.92,t:"every week"},{k:"Bi-weekly",m:1,t:"every 2 weeks"},{k:"Monthly",m:1.12,t:"every month"}];
+var st={size:1,bath:1,freq:1};
+
+function opts(host,arr,key,lbl){
+  var el=$(host);el.innerHTML="";
+  arr.forEach(function(o,i){
+    var b=document.createElement("button");
+    b.type="button";b.className="opt"+(st[key]===i?" on":"");
+    b.textContent=lbl?lbl(o):o;
+    b.setAttribute("aria-pressed",st[key]===i?"true":"false");
+    b.addEventListener("click",function(){st[key]=i;draw()});
+    el.appendChild(b);
+  });
+}
+function draw(){
+  opts("#size",SIZES,"size",function(o){return o.k});
+  opts("#bath",BATHS,"bath");
+  opts("#freq",FREQS,"freq",function(o){return o.k});
+  var s=SIZES[st.size],f=FREQS[st.freq];
+  var extraBath=st.bath*20;
+  var price=Math.round((s.base+extraBath)*f.m);
+  var first=Math.round((s.first+extraBath));
+  $("#amt").textContent="$"+price;
+  $("#per").textContent="per visit &middot; "+f.t;
+  $("#per").innerHTML="per visit &middot; "+f.t;
+  $("#firstclean").textContent="First clean $"+first+" — a deeper visit that brings the home to standard.";
+}
+draw();
+
+/* before / after */
+var ba=$("#ba"),after=$("#baAfter"),handle=$("#baHandle"),drag=false;
+function setBA(x){
+  var r=ba.getBoundingClientRect();
+  var p=Math.min(100,Math.max(0,((x-r.left)/r.width)*100));
+  after.style.clipPath="inset(0 0 0 "+p+"%)";
+  handle.style.left=p+"%";
+}
+function down(e){drag=true;setBA((e.touches?e.touches[0]:e).clientX);e.preventDefault()}
+function move(e){if(drag)setBA((e.touches?e.touches[0]:e).clientX)}
+function up(){drag=false}
+ba.addEventListener("mousedown",down);ba.addEventListener("touchstart",down,{passive:false});
+window.addEventListener("mousemove",move);window.addEventListener("touchmove",move,{passive:true});
+window.addEventListener("mouseup",up);window.addEventListener("touchend",up);
+
+/* reveals */
+if("IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}});
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(n){io.observe(n)});
+}else{
+  Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(n){n.classList.add("in")});
+}
+
+/* scroll story */
+(function(){
+  var beats=[].slice.call(document.querySelectorAll(".beat"));
+  var layers=[].slice.call(document.querySelectorAll(".layer"));
+  var num=$("#stagenum"),bar=$("#stagebar");
+  if(!beats.length||!("IntersectionObserver" in window))return;
+  var cur=-1;
+  function set(i){
+    if(i===cur)return;cur=i;
+    layers.forEach(function(l){l.classList.toggle("on",+l.dataset.i===i)});
+    beats.forEach(function(b){b.classList.toggle("act",+b.dataset.i===i)});
+    num.textContent="0"+(i+1)+" / 04";
+    bar.style.width=((i+1)/4*100)+"%";
+  }
+  var so=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting)set(+e.target.dataset.i)});
+  },{rootMargin:"-45% 0px -45% 0px",threshold:0});
+  beats.forEach(function(b){so.observe(b)});
+  set(0);
+})();
+
+/* form */
+$("#form").addEventListener("submit",function(e){
+  e.preventDefault();
+  var f=e.target;
+  if(!f.name.value.trim()||!f.phone.value.trim()||!f.email.value.trim()){
+    alert("Name, phone and email please.");return;
+  }
+  var d=document.createElement("div");
+  d.className="sent";
+  d.textContent="Got it, "+f.name.value.trim()+". We'll be in touch within five minutes. (Demo — not yet connected to a live inbox.)";
+  f.appendChild(d);
+  f.querySelector("button").disabled=true;
+  f.querySelector("button").style.opacity=".5";
+});
+})();
+</script>

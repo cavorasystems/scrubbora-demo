@@ -1,0 +1,232 @@
+<title>Areas We Serve</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=Kaushan+Script&display=swap">
+<style>
+:root{
+  --pink:#FF2D8D; --teal:#00D1C5;
+  --ink:#0D0D0F; --ink2:#15151A; --grey:#2A2A2E; --grey2:#3A3A42;
+  --paper:#F2F2F2; --muted:#A9A9B4;
+  --shadow:0 20px 60px -20px rgba(0,0,0,.8);
+  --mop:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><g transform='rotate(-20 20 20)'><rect x='18' y='2' width='3.4' height='20' rx='1.7' fill='%2300D1C5'/><path d='M11 21h18l-2.2 11a2 2 0 0 1-2 1.7h-9.6a2 2 0 0 1-2-1.7z' fill='%23FF2D8D'/><rect x='10' y='19' width='20' height='3.6' rx='1.8' fill='%23F2F2F2'/></g></svg>") 20 4, auto;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:Montserrat,system-ui,sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+@media (hover:hover) and (pointer:fine){body,a,button,summary{cursor:var(--mop)}input,select,textarea{cursor:auto}}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.label{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal)}
+.pinklabel{color:var(--pink)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,15,0);backdrop-filter:blur(0);transition:.4s;border-bottom:1px solid transparent}
+nav.stuck{background:rgba(13,13,15,.9);backdrop-filter:blur(14px);border-bottom-color:var(--grey)}
+.navin{display:flex;align-items:center;gap:26px;padding:16px 0}
+.brand{font-family:"Kaushan Script",cursive;font-size:30px;color:var(--pink);line-height:1;white-space:nowrap}
+.brand em{font-style:normal;display:block;font-family:Montserrat,sans-serif;font-size:8.5px;letter-spacing:.28em;color:var(--teal);text-transform:uppercase;margin-top:-2px;padding-left:3px}
+.navlinks{display:flex;gap:24px;margin-left:auto;font-size:14px;font-weight:600}
+.navlinks a{color:var(--muted);transition:.2s}
+.navlinks a:hover{color:var(--paper)}
+.navlinks a.here{color:var(--teal)}
+.navcta{background:var(--pink);color:#fff;padding:11px 20px;border-radius:99px;font-weight:700;font-size:14px;transition:.2s;white-space:nowrap}
+.navcta:hover{transform:translateY(-2px);box-shadow:0 8px 24px -6px var(--pink)}
+@media(max-width:940px){.navlinks{display:none}}
+
+.crumb{padding-top:104px;font-size:12.5px;color:var(--grey2);font-weight:600}
+.crumb a{color:var(--muted)}.crumb a:hover{color:var(--teal)}
+.crumb span{margin:0 8px}
+
+.hero{position:relative;padding:18px 0 56px;overflow:hidden}
+.heroglow{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(660px 380px at 14% 26%,rgba(255,45,141,.17),transparent 64%),
+             radial-gradient(600px 400px at 90% 66%,rgba(0,209,197,.14),transparent 62%)}
+.heroin{position:relative;z-index:2;max-width:760px}
+h1{margin:12px 0 0;font-family:"Bebas Neue",Impact,sans-serif;font-size:clamp(44px,7.2vw,82px);line-height:.9}
+h1 .pinkword{color:var(--pink)}
+h1 .tealword{color:var(--teal)}
+.sub{font-size:clamp(16px,1.9vw,19px);color:var(--muted);max-width:52ch;margin:20px 0 0}
+.sub b{color:var(--paper);font-weight:600}
+.statrow{display:flex;gap:34px;flex-wrap:wrap;margin-top:32px}
+.statrow div .n{font-family:"Bebas Neue",sans-serif;font-size:44px;line-height:.9;color:var(--teal)}
+.statrow div .t{font-size:12.5px;color:var(--muted);font-weight:600;margin-top:4px}
+
+section{padding:64px 0}
+.sechead{max-width:660px;margin-bottom:34px}
+.sechead h2{font-family:"Bebas Neue",sans-serif;font-size:clamp(30px,4.4vw,44px);margin:12px 0 12px;line-height:.95}
+.sechead p{color:var(--muted);font-size:16.5px;margin:0}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+.zone{margin-bottom:44px}
+.zonehead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:12px;margin-bottom:18px;border-bottom:1px solid var(--grey)}
+.zonehead h3{font-family:"Bebas Neue",sans-serif;font-size:30px;margin:0;letter-spacing:.01em}
+.zonehead .tag{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 11px;border-radius:99px}
+.tag.core{background:rgba(0,209,197,.14);color:var(--teal);border:1px solid rgba(0,209,197,.32)}
+.tag.min{background:rgba(255,45,141,.12);color:var(--pink);border:1px solid rgba(255,45,141,.3)}
+.zonehead p{margin:0;color:var(--muted);font-size:13.5px;flex-basis:100%}
+
+.areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px}
+.area{background:linear-gradient(160deg,#17171d,#111116);border:1px solid var(--grey);border-radius:15px;padding:20px 22px;transition:.28s;display:block}
+.area:hover{transform:translateY(-5px);border-color:var(--pink)}
+.area h4{font-family:"Bebas Neue",sans-serif;font-size:23px;margin:0 0 6px;letter-spacing:.01em;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.area h4 .arrow{color:var(--pink);font-size:19px;opacity:0;transform:translateX(-5px);transition:.25s}
+.area:hover h4 .arrow{opacity:1;transform:none}
+.area p{color:var(--muted);font-size:13.6px;margin:0 0 10px;line-height:1.5}
+.area .hoods{font-size:12px;color:var(--grey2);font-weight:600;letter-spacing:.02em}
+
+.note{background:var(--ink2);border:1px solid var(--grey);border-radius:16px;padding:24px 26px;margin-top:8px}
+.note p{margin:0 0 10px;color:var(--muted);font-size:14.5px}
+.note p:last-child{margin:0}
+.note b{color:var(--paper)}
+
+.cta{background:var(--ink2);border-top:1px solid var(--grey);border-bottom:1px solid var(--grey);text-align:center}
+.cta h2{font-family:"Bebas Neue",sans-serif;font-size:clamp(32px,5vw,50px);margin:12px 0 14px;line-height:.95}
+.cta p{color:var(--muted);max-width:54ch;margin:0 auto 26px}
+.btn{display:inline-block;padding:15px 28px;border-radius:99px;font-weight:700;font-size:15px;transition:.2s}
+.btn-pink{background:var(--pink);color:#fff}
+.btn-pink:hover{transform:translateY(-2px);box-shadow:0 12px 32px -8px var(--pink)}
+.btn-ghost{border:1.5px solid var(--grey2);color:var(--paper)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+
+footer{background:#08080A;padding:56px 0 30px;border-top:1px solid var(--grey)}
+.footgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px}
+@media(max-width:820px){.footgrid{grid-template-columns:1fr 1fr;gap:26px}}
+footer h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin:0 0 14px;font-weight:700}
+footer a,footer p{color:var(--muted);font-size:14px;display:block;margin-bottom:9px}
+footer a:hover{color:var(--paper)}
+.footbot{border-top:1px solid var(--grey);padding-top:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--grey2)}
+</style>
+
+<nav id="nav"><div class="wrap navin">
+  <a href="index.html" class="brand">Scrubbora<em>Cleaning Services</em></a>
+  <div class="navlinks">
+    <a href="#">Services</a><a href="#">Pricing</a><a href="#">Commercial</a>
+    <a href="#" class="here">Areas</a><a href="#">Contact</a>
+  </div>
+  <a href="#book" class="navcta">Book in 60 seconds</a>
+</div></nav>
+
+<div class="wrap crumb"><a href="#">Home</a><span>&rsaquo;</span>Areas we serve</div>
+
+<header class="hero">
+  <div class="heroglow"></div>
+  <div class="wrap heroin">
+    <p class="label">Capital Regional District &middot; Vancouver Island</p>
+    <h1>Cleaning Across<br><span class="pinkword">Greater Victoria</span></h1>
+    <p class="sub">From <b>Sidney to Sooke</b>, and everything between. Homes, dental and medical offices, and strata buildings — all thirteen municipalities, one licence, one team, one published price list.</p>
+    <div class="statrow">
+      <div><div class="n">13</div><div class="t">Municipalities covered</div></div>
+      <div><div class="n">397K</div><div class="t">People in the region</div></div>
+      <div><div class="n">1</div><div class="t">Price list, everywhere</div></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sechead reveal">
+      <p class="label">Where we work</p>
+      <h2>Pick your area</h2>
+      <p>Each area has its own page with local pricing, the neighbourhoods we cover and answers specific to the housing there.</p>
+    </div>
+
+    <div class="zone reveal">
+      <div class="zonehead">
+        <h3>Victoria &amp; the core</h3><span class="tag core">No travel minimum</span>
+        <p>Our densest routes. Same-week starts are usually available here.</p>
+      </div>
+      <div class="areas">
+        <a class="area" href="#"><h4>Victoria<span class="arrow">&rarr;</span></h4><p>Downtown condos, heritage homes and rentals. Our busiest area for move-outs and one-bedroom recurring work.</p><div class="hoods">James Bay &middot; Fairfield &middot; Fernwood &middot; Rockland &middot; Burnside</div></a>
+        <a class="area" href="#"><h4>Saanich<span class="arrow">&rarr;</span></h4><p>The region's largest municipality. Family homes, university rentals and a lot of bi-weekly recurring service.</p><div class="hoods">Gordon Head &middot; Cordova Bay &middot; Royal Oak &middot; Broadmead &middot; Quadra Village</div></a>
+        <a class="area" href="#"><h4>Oak Bay<span class="arrow">&rarr;</span></h4><p>Character homes built before 1940, plus Uplands estates that need two cleaners and a lighter hand on original surfaces.</p><div class="hoods">Uplands &middot; Willows &middot; Gonzales &middot; Estevan &middot; South Oak Bay</div></a>
+        <a class="area" href="#"><h4>Esquimalt<span class="arrow">&rarr;</span></h4><p>Naval community with older homes and a growing number of condos. Frequent postings mean steady move-in and move-out work.</p><div class="hoods">Esquimalt Village &middot; Saxe Point &middot; Rockheights</div></a>
+        <a class="area" href="#"><h4>View Royal<span class="arrow">&rarr;</span></h4><p>Newer subdivisions and townhomes between the core and the Westshore. Easy parking, straightforward recurring cleans.</p><div class="hoods">Thetis Lake &middot; Helmcken &middot; Portage Inlet</div></a>
+      </div>
+    </div>
+
+    <div class="zone reveal">
+      <div class="zonehead">
+        <h3>The Westshore</h3><span class="tag core">No travel minimum</span>
+        <p>The fastest-growing part of the region, and where most new-build cleaning is.</p>
+      </div>
+      <div class="areas">
+        <a class="area" href="#"><h4>Langford<span class="arrow">&rarr;</span></h4><p>The fastest-growing city in BC. New builds, townhome complexes and young families — heavy demand for recurring bi-weekly work.</p><div class="hoods">Westhills &middot; Bear Mountain &middot; Happy Valley &middot; Goldstream</div></a>
+        <a class="area" href="#"><h4>Colwood<span class="arrow">&rarr;</span></h4><p>New subdivisions and ocean-view homes. Post-construction cleaning is a steady line of work here.</p><div class="hoods">Royal Bay &middot; Latoria &middot; Triangle Mountain &middot; Colwood Corners</div></a>
+        <a class="area" href="#"><h4>Highlands<span class="arrow">&rarr;</span></h4><p>Rural acreage and larger custom homes. Usually a two-cleaner visit; we schedule these together to keep the route sensible.</p><div class="hoods">Millstream &middot; Caleb Pike</div></a>
+        <a class="area" href="#"><h4>Metchosin<span class="arrow">&rarr;</span></h4><p>Rural properties and farmhouses. Best booked on the same day as Colwood or Langford work.</p><div class="hoods">Happy Valley &middot; William Head &middot; Pedder Bay</div></a>
+      </div>
+    </div>
+
+    <div class="zone reveal">
+      <div class="zonehead">
+        <h3>The Saanich Peninsula</h3><span class="tag core">No travel minimum</span>
+        <p>Sidney has the oldest average age in the region, and our seniors service is busiest here.</p>
+      </div>
+      <div class="areas">
+        <a class="area" href="#"><h4>Sidney<span class="arrow">&rarr;</span></h4><p>Condos, townhomes and a large retired population. Weekly seniors slots with the same cleaner are our most requested service in Sidney.</p><div class="hoods">Beacon Avenue &middot; Sidney by the Sea &middot; Resthaven</div></a>
+        <a class="area" href="#"><h4>North Saanich<span class="arrow">&rarr;</span></h4><p>Larger properties on acreage near the airport and ferry terminal. Mostly weekly and bi-weekly recurring work.</p><div class="hoods">Deep Cove &middot; Ardmore &middot; Lands End</div></a>
+        <a class="area" href="#"><h4>Central Saanich<span class="arrow">&rarr;</span></h4><p>Farmland, village homes and newer developments. Brentwood Bay and Saanichton are on our regular peninsula route.</p><div class="hoods">Brentwood Bay &middot; Saanichton &middot; Turgoose</div></a>
+      </div>
+    </div>
+
+    <div class="zone reveal">
+      <div class="zonehead">
+        <h3>Sooke &amp; the west</h3><span class="tag min">$300 minimum</span>
+        <p>Further out, so we group these visits. Worth booking with a neighbour to split the trip.</p>
+      </div>
+      <div class="areas">
+        <a class="area" href="#"><h4>Sooke<span class="arrow">&rarr;</span></h4><p>About 45 minutes from the core, so we run a set day each week. Vacation homes, move-outs and larger recurring jobs.</p><div class="hoods">Sooke Village &middot; Whiffin Spit &middot; East Sooke &middot; Otter Point</div></a>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <p><b>Not sure if you're in range?</b> If you're inside the Capital Regional District, you almost certainly are. Our business licence is the Greater Victoria Inter-Municipal Licence, which covers all thirteen municipalities, so there's no jurisdiction we can't legally work in.</p>
+      <p><b>Commercial and strata work is region-wide too.</b> Dental and medical offices, strata common areas and small commercial spaces are cleaned on the same footprint, evenings, on a set schedule.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="book">
+  <div class="wrap">
+    <p class="label">Anywhere in the region</p>
+    <h2>One price list. Thirteen municipalities.</h2>
+    <p>The published rate is the rate whether you're in James Bay or Brentwood Bay. Pick your home size and you'll have a number in about ten seconds.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="#" class="btn btn-pink">See prices &amp; book</a>
+      <a href="tel:+1250XXXXXXX" class="btn btn-ghost">Call 250-XXX-XXXX</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footgrid">
+      <div>
+        <a href="#" class="brand" style="font-size:32px">Scrubbora<em>Cleaning Services</em></a>
+        <p style="margin-top:15px;max-width:30ch">Homes, clinics and buildings across Greater Victoria. Insured, bonded and WorkSafeBC registered.</p>
+      </div>
+      <div><h4>Services</h4><a href="#">House cleaning</a><a href="#">Deep cleans</a><a href="#">Move-in / move-out</a><a href="#">Medical &amp; dental</a><a href="#">Strata &amp; commercial</a></div>
+      <div><h4>Areas</h4><a href="#">Victoria</a><a href="#">Saanich</a><a href="#">Oak Bay</a><a href="#">Langford</a><a href="#">Sidney</a><a href="#" style="color:var(--teal)">All areas</a></div>
+      <div><h4>Contact</h4><a href="tel:+1250XXXXXXX">250-XXX-XXXX</a><a href="mailto:hello@scrubbora.com">hello@scrubbora.com</a><a href="#">Book online</a><p>Mon–Fri 8–6, Sat 9–4</p></div>
+    </div>
+    <div class="footbot">
+      <span>&copy; 2026 Scrubbora Cleaning Co. &middot; Victoria, BC</span>
+      <span>Insured &amp; bonded &middot; WorkSafeBC registered</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+var nav=document.getElementById("nav");
+var s=function(){nav.classList.toggle("stuck",window.scrollY>28)};
+s();window.addEventListener("scroll",s,{passive:true});
+if("IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(n){io.observe(n)});
+}else{Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(n){n.classList.add("in")})}
+})();
+</script>
