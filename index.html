@@ -729,26 +729,65 @@ $("#form").addEventListener("submit",function(e){
 </script>
 
 <script>
-/* Booking form -> prefilled message. Static site, no backend: we hand the
-   visitor a ready-to-send email (or SMS on a phone) rather than dropping the
-   lead silently. */
+/* Booking form. Posts straight to the Scrubbora lead webhook, which emails
+   info@scrubbora.com with Reply-To set to the customer. If that call fails for
+   any reason we fall back to handing the visitor a prefilled email/SMS rather
+   than dropping the lead. */
 (function(){
   var f = document.getElementById('form');
   if(!f) return;
-  var panel = document.getElementById('sent'),
-      link  = document.getElementById('sendmail'),
-      msgEl = document.getElementById('sentmsg'),
+  var panel  = document.getElementById('sent'),
+      link   = document.getElementById('sendmail'),
+      msgEl  = document.getElementById('sentmsg'),
+      headEl = panel.querySelector('h4'),
+      btn    = f.querySelector('button[type=submit]'),
+      ENDPOINT = 'https://hook.us2.make.com/wqsef44qlzwier62a72cwqpwx7gbqcyj',
       TO_EMAIL = 'info@scrubbora.com',
       TO_SMS   = '+12504159947',
       isPhone  = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  f.addEventListener('submit', function(e){
-    e.preventDefault();
-    var d = {}, ok = true;
+  function collect(){
+    var d = {};
     ['name','phone','email','type','area','msg'].forEach(function(k){
       var el = f.elements[k];
       d[k] = el ? el.value.trim() : '';
     });
+    return d;
+  }
+
+  function succeeded(){
+    headEl.textContent = 'Got it \u2014 thank you';
+    msgEl.textContent  = "Your request is in. We'll reply within five minutes during business hours. If it's urgent, call us.";
+    link.style.display = 'none';
+    panel.classList.add('on');
+    panel.scrollIntoView({behavior:'smooth', block:'center'});
+    f.reset();
+  }
+
+  function fallback(d){
+    var subject = 'Cleaning request \u2014 ' + d.name + (d.area ? ' (' + d.area + ')' : ''),
+        body = ['Name: ' + d.name, 'Phone: ' + d.phone, 'Email: ' + d.email,
+                'Service: ' + d.type, 'Area: ' + (d.area || '\u2014'), '',
+                d.msg || '(no extra details)'].join('\n');
+    headEl.textContent = 'Almost there \u2014 one tap to send';
+    link.style.display = '';
+    if(isPhone){
+      link.href = 'sms:' + TO_SMS + '&body=' + encodeURIComponent(body);
+      link.textContent = 'Send the text';
+      msgEl.textContent = "We've written your text for you. Send it and we'll reply within five minutes during business hours.";
+    } else {
+      link.href = 'mailto:' + TO_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      link.textContent = 'Send the message';
+      msgEl.textContent = "We've written your message for you. Send it and we'll reply within five minutes during business hours.";
+    }
+    panel.classList.add('on');
+    panel.scrollIntoView({behavior:'smooth', block:'center'});
+    setTimeout(function(){ link.click(); }, 400);
+  }
+
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var d = collect(), ok = true;
     ['name','phone','email'].forEach(function(k){
       var el = f.elements[k];
       if(!el) return;
@@ -758,27 +797,32 @@ $("#form").addEventListener("submit",function(e){
     });
     if(!ok){ f.elements.name.focus(); return; }
 
-    var subject = 'Cleaning request \u2014 ' + d.name + (d.area ? ' (' + d.area + ')' : ''),
-        body = [
-          'Name: '  + d.name,
-          'Phone: ' + d.phone,
-          'Email: ' + d.email,
-          'Service: ' + d.type,
-          'Area: '  + (d.area || '\u2014'),
-          '',
-          d.msg || '(no extra details)'
-        ].join('\n');
+    var label = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = 'Sending\u2026';
 
-    if(isPhone){
-      link.href = 'sms:' + TO_SMS + '&body=' + encodeURIComponent(body);
-      link.textContent = 'Send the text';
-      msgEl.textContent = "We've written your text for you. Send it and we'll reply within five minutes during business hours.";
-    } else {
-      link.href = 'mailto:' + TO_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    var done = false;
+    function finish(fn){
+      if(done) return;
+      done = true;
+      btn.disabled = false;
+      btn.innerHTML = label;
+      fn();
     }
-    panel.classList.add('on');
-    panel.scrollIntoView({behavior:'smooth', block:'center'});
-    setTimeout(function(){ link.click(); }, 400);
+
+    var bail = setTimeout(function(){ finish(function(){ fallback(d); }); }, 8000);
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(d)
+    }).then(function(r){
+      clearTimeout(bail);
+      finish(r.ok ? succeeded : function(){ fallback(d); });
+    }).catch(function(){
+      clearTimeout(bail);
+      finish(function(){ fallback(d); });
+    });
   });
 })();
 </script>
