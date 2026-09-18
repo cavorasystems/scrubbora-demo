@@ -294,6 +294,16 @@ footer a:hover{color:var(--paper)}
 .footbot{border-top:1px solid var(--grey);padding-top:22px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--grey2)}
 .tagline{font-family:"Bebas Neue",sans-serif;font-size:clamp(22px,3.4vw,34px);letter-spacing:.13em;text-align:center;padding:34px 0;color:var(--paper)}
 .tagline i{font-style:normal;color:var(--teal)}
+
+.sent{display:none;grid-column:1/-1;background:linear-gradient(160deg,#17171d,#111116);border:1.5px solid var(--teal);border-radius:16px;padding:26px;text-align:center}
+.sent.on{display:block}
+.sent h4{font-family:"Bebas Neue",sans-serif;font-size:30px;letter-spacing:.02em;color:var(--paper);margin:0 0 8px}
+.sent p{color:var(--muted);font-size:14.5px;margin:0 0 18px}
+.sent .acts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.sent a{display:inline-block;padding:13px 24px;border-radius:99px;font-weight:700;font-size:14.5px}
+.sent .a1{background:var(--pink);color:#fff}
+.sent .a2{border:1.5px solid var(--grey2);color:var(--paper)}
+.err{border-color:#ff5c5c!important}
 </style>
 </head>
 <body>
@@ -572,6 +582,14 @@ footer a:hover{color:var(--paper)}
       <div><input name="area" placeholder="Neighbourhood or city"></div>
       <div class="full"><textarea name="msg" placeholder="Anything we should know? Size, access, pets, timing…"></textarea></div>
       <div class="full"><button type="submit">Send it &mdash; we'll reply in 5 minutes</button></div>
+      <div class="sent" id="sent">
+        <h4>Almost there &mdash; one tap to send</h4>
+        <p id="sentmsg">We've written your message for you. Send it and we'll reply within five minutes during business hours.</p>
+        <div class="acts">
+          <a class="a1" id="sendmail" href="#">Send the message</a>
+          <a class="a2" href="tel:+12504159947">Call 250-415-9947</a>
+        </div>
+      </div>
       <p class="formnote">Or call <a href="tel:+12504159947" style="color:var(--teal);font-weight:700">250-415-9947</a>. We never share your details.</p>
     </form>
   </div>
@@ -707,6 +725,61 @@ $("#form").addEventListener("submit",function(e){
   f.querySelector("button").disabled=true;
   f.querySelector("button").style.opacity=".5";
 });
+})();
+</script>
+
+<script>
+/* Booking form -> prefilled message. Static site, no backend: we hand the
+   visitor a ready-to-send email (or SMS on a phone) rather than dropping the
+   lead silently. */
+(function(){
+  var f = document.getElementById('form');
+  if(!f) return;
+  var panel = document.getElementById('sent'),
+      link  = document.getElementById('sendmail'),
+      msgEl = document.getElementById('sentmsg'),
+      TO_EMAIL = 'info@scrubbora.com',
+      TO_SMS   = '+12504159947',
+      isPhone  = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var d = {}, ok = true;
+    ['name','phone','email','type','area','msg'].forEach(function(k){
+      var el = f.elements[k];
+      d[k] = el ? el.value.trim() : '';
+    });
+    ['name','phone','email'].forEach(function(k){
+      var el = f.elements[k];
+      if(!el) return;
+      var bad = !d[k] || (k === 'email' && d[k].indexOf('@') < 1);
+      el.classList.toggle('err', bad);
+      if(bad) ok = false;
+    });
+    if(!ok){ f.elements.name.focus(); return; }
+
+    var subject = 'Cleaning request \u2014 ' + d.name + (d.area ? ' (' + d.area + ')' : ''),
+        body = [
+          'Name: '  + d.name,
+          'Phone: ' + d.phone,
+          'Email: ' + d.email,
+          'Service: ' + d.type,
+          'Area: '  + (d.area || '\u2014'),
+          '',
+          d.msg || '(no extra details)'
+        ].join('\n');
+
+    if(isPhone){
+      link.href = 'sms:' + TO_SMS + '&body=' + encodeURIComponent(body);
+      link.textContent = 'Send the text';
+      msgEl.textContent = "We've written your text for you. Send it and we'll reply within five minutes during business hours.";
+    } else {
+      link.href = 'mailto:' + TO_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+    panel.classList.add('on');
+    panel.scrollIntoView({behavior:'smooth', block:'center'});
+    setTimeout(function(){ link.click(); }, 400);
+  });
 })();
 </script>
 
