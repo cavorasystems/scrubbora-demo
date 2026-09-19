@@ -29,7 +29,7 @@
 {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"18:00"},
 {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"16:00"}],
 "hasOfferCatalog":{"@type":"OfferCatalog","name":"Cleaning services","itemListElement":[
-{"@type":"Offer","itemOffered":{"@type":"Service","name":"Recurring house cleaning"},"priceCurrency":"CAD","price":"129","priceSpecification":{"@type":"PriceSpecification","minPrice":"129","priceCurrency":"CAD"}},
+{"@type":"Offer","itemOffered":{"@type":"Service","name":"Recurring house cleaning"},"priceCurrency":"CAD","price":"58","priceSpecification":{"@type":"UnitPriceSpecification","price":"58","priceCurrency":"CAD","unitCode":"HUR"}},
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"Deep clean"},"priceCurrency":"CAD","price":"255"},
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"Move-in / move-out clean"},"priceCurrency":"CAD","price":"299"},
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"Medical and dental office cleaning"},"priceCurrency":"CAD","price":"900"},
@@ -349,20 +349,20 @@ footer a:hover{color:var(--paper)}
       <div class="calc">
         <div class="calchead">
           <h2>Your price, right now</h2>
-          <p>No walkthrough. No callback. Recurring rates, pre-GST.</p>
+          <p>No walkthrough. No callback. $58/hr on a recurring schedule, $65 one-time.</p>
         </div>
         <div class="calcgrid">
           <div class="field"><label>Home size</label><div class="opts" id="size"></div></div>
           <div class="field"><label>Bathrooms</label><div class="opts" id="bath"></div></div>
           <div class="field"><label>How often</label><div class="opts" id="freq"></div></div>
           <div class="priceout">
-            <div class="amt" id="amt">$165</div>
-            <div class="per" id="per">per visit &middot; every 2 weeks</div>
+            <div class="amt" id="amt">$154</div>
+            <div class="per" id="per">about 2¾ hrs at $58/hr &middot; every 2 weeks</div>
           </div>
         </div>
         <p class="calcnote">
-          <span id="firstclean">First clean $216 &mdash; a deeper visit that brings the home to standard.</span>
-          <span>Add-ons: oven $45 &middot; fridge $35 &middot; interior windows $6 each</span>
+          <span id="firstclean">First clean about $231 &mdash; a deeper visit that brings the home to standard.</span>
+          <span>If your home needs more time than quoted, we stop and call you first &mdash; you decide. Add-ons: oven $45 &middot; fridge $35 &middot; interior windows $6 each</span>
         </p>
       </div>
     </div>
@@ -385,7 +385,7 @@ footer a:hover{color:var(--paper)}
         <h3>Homes</h3>
         <p>Weekly, bi-weekly or monthly, with the same cleaner every visit and a flat price you can see before you book.</p>
         <ul><li>Kitchen, bathrooms, floors, surfaces</li><li>Same cleaner, same day</li><li>Deep cleans &amp; move-outs</li><li>Seniors service available</li></ul>
-        <div class="from">$129 <small>/ visit</small></div>
+        <div class="from">$58 <small>/ hour</small></div>
       </div>
       <div class="card reveal">
         <img class="cardpic" src="img/clinic.jpg" alt="Spotless dental treatment room cleaned after hours" width="1600" height="900" loading="lazy" decoding="async">
@@ -422,7 +422,7 @@ footer a:hover{color:var(--paper)}
         <div class="layer on" data-i="0">
           <div class="pricecard">
             <div class="lbl">3 bedroom &middot; bi-weekly</div>
-            <div class="big">$165</div>
+            <div class="big">$58<span style="font-size:.42em">/hr</span></div>
             <div class="sm">Published. Before you book.</div>
           </div>
         </div>
@@ -631,12 +631,17 @@ var m=$("#marq"),html=words.map(function(w){return "<span>"+w+"</span>"}).join("
 m.innerHTML=html+html;
 
 /* price calculator */
+/* Hourly model. Hours are the estimate; the rate is what we publish. A firm
+   quote is the hours x the rate, and we hold it -- see the stop-and-call note. */
 var SIZES=[
- {k:"1 bed",base:129,first:174},{k:"2 bed",base:145,first:196},
- {k:"3 bed apt",base:165,first:223},{k:"House <2000",base:189,first:255},
- {k:"2000–2500",base:209,first:282},{k:"2500–3000",base:235,first:317}];
+ {k:"1 bed",h:1.75},{k:"2 bed",h:2.25},
+ {k:"3 bed apt",h:2.5},{k:"House <2000",h:3.25},
+ {k:"2000–2500",h:3.75},{k:"2500–3000",h:4.25}];
 var BATHS=["1","2","3","4+"];
-var FREQS=[{k:"Weekly",m:0.92,t:"every week"},{k:"Bi-weekly",m:1,t:"every 2 weeks"},{k:"Monthly",m:1.06,t:"every month"}];
+var BATH_HRS=0.4;                       /* each bathroom past the first */
+var FIRST_MULT=1.5;                     /* first visit is a deeper clean */
+var FREQS=[{k:"Weekly",r:52,t:"every week"},{k:"Bi-weekly",r:58,t:"every 2 weeks"},
+           {k:"Monthly",r:58,t:"every month"},{k:"One-time",r:65,t:"one-time clean"}];
 var st={size:1,bath:1,freq:1};
 
 function opts(host,arr,key,lbl){
@@ -655,13 +660,13 @@ function draw(){
   opts("#bath",BATHS,"bath");
   opts("#freq",FREQS,"freq",function(o){return o.k});
   var s=SIZES[st.size],f=FREQS[st.freq];
-  var extraBath=st.bath*20;
-  var price=Math.round((s.base+extraBath)*f.m);
-  var first=Math.round((s.first+extraBath));
+  var hrs=s.h+(st.bath*BATH_HRS);
+  var price=Math.round(hrs*f.r);
+  var first=Math.round(hrs*FIRST_MULT*f.r);
+  var hLbl=(Math.round(hrs*4)/4).toString().replace(".25","¼").replace(".5","½").replace(".75","¾");
   $("#amt").textContent="$"+price;
-  $("#per").textContent="per visit &middot; "+f.t;
-  $("#per").innerHTML="per visit &middot; "+f.t;
-  $("#firstclean").textContent="First clean $"+first+" — a deeper visit that brings the home to standard.";
+  $("#per").innerHTML="about "+hLbl+" hrs at $"+f.r+"/hr &middot; "+f.t;
+  $("#firstclean").textContent="First clean about $"+first+" — a deeper visit that brings the home to standard.";
 }
 draw();
 
