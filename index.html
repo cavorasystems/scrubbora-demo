@@ -30,7 +30,7 @@
 {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"16:00"}],
 "hasOfferCatalog":{"@type":"OfferCatalog","name":"Cleaning services","itemListElement":[
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"Recurring house cleaning"},"priceCurrency":"CAD","price":"129","priceSpecification":{"@type":"PriceSpecification","minPrice":"129","priceCurrency":"CAD"}},
-{"@type":"Offer","itemOffered":{"@type":"Service","name":"Deep clean"},"priceCurrency":"CAD","price":"269"},
+{"@type":"Offer","itemOffered":{"@type":"Service","name":"Deep clean"},"priceCurrency":"CAD","price":"255"},
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"Move-in / move-out clean"},"priceCurrency":"CAD","price":"299"},
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"Medical and dental office cleaning"},"priceCurrency":"CAD","price":"900"},
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"Strata common area cleaning"},"priceCurrency":"CAD","price":"650"}]}}
@@ -356,12 +356,12 @@ footer a:hover{color:var(--paper)}
           <div class="field"><label>Bathrooms</label><div class="opts" id="bath"></div></div>
           <div class="field"><label>How often</label><div class="opts" id="freq"></div></div>
           <div class="priceout">
-            <div class="amt" id="amt">$155</div>
+            <div class="amt" id="amt">$165</div>
             <div class="per" id="per">per visit &middot; every 2 weeks</div>
           </div>
         </div>
         <p class="calcnote">
-          <span id="firstclean">First clean $209 &mdash; a deeper visit that brings the home to standard.</span>
+          <span id="firstclean">First clean $216 &mdash; a deeper visit that brings the home to standard.</span>
           <span>Add-ons: oven $45 &middot; fridge $35 &middot; interior windows $6 each</span>
         </p>
       </div>
@@ -422,7 +422,7 @@ footer a:hover{color:var(--paper)}
         <div class="layer on" data-i="0">
           <div class="pricecard">
             <div class="lbl">3 bedroom &middot; bi-weekly</div>
-            <div class="big">$179</div>
+            <div class="big">$165</div>
             <div class="sm">Published. Before you book.</div>
           </div>
         </div>
@@ -632,11 +632,11 @@ m.innerHTML=html+html;
 
 /* price calculator */
 var SIZES=[
- {k:"1 bed",base:129,first:174},{k:"2 bed",base:155,first:209},
- {k:"3 bed apt",base:179,first:242},{k:"House <2000",base:199,first:269},
- {k:"2000–2500",base:225,first:304},{k:"2500–3000",base:255,first:344}];
+ {k:"1 bed",base:129,first:174},{k:"2 bed",base:145,first:196},
+ {k:"3 bed apt",base:165,first:223},{k:"House <2000",base:189,first:255},
+ {k:"2000–2500",base:209,first:282},{k:"2500–3000",base:235,first:317}];
 var BATHS=["1","2","3","4+"];
-var FREQS=[{k:"Weekly",m:0.92,t:"every week"},{k:"Bi-weekly",m:1,t:"every 2 weeks"},{k:"Monthly",m:1.12,t:"every month"}];
+var FREQS=[{k:"Weekly",m:0.92,t:"every week"},{k:"Bi-weekly",m:1,t:"every 2 weeks"},{k:"Monthly",m:1.06,t:"every month"}];
 var st={size:1,bath:1,freq:1};
 
 function opts(host,arr,key,lbl){
